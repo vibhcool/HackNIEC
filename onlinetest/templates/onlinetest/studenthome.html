@@ -1,75 +1,67 @@
-<!doctype html> {% load static %}
-
-<html class="no-js" lang="">
+<!doctype html>
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>
+    </title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="/static/onlinetest/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/onlinetest/css/font-awesome.css" type="text/css" />
-    <link rel="stylesheet" href="/static/onlinetest/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="/static/onlinetest/css/sticky-footer.css" type="text/css" />
-    <link rel="stylesheet" href="/static/onlinetest/css/dashboard.css" type="text/css" />
-    <script language="JavaScript" type="text/javascript" src="/static/onlinetest/js/jquery-1.9.1.min.js"></script>
-    <script src="/static/onlinetest/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,700,800' rel='stylesheet'
+        type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
     <div class="container">
-        <div class="content">
-            <div class="header">
-                <h3>
-                    <center>Student Home</center>
-                    </h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>
+                    Student Home
+                    <hr>
+                </h2>
+                <form class="form col-md-12 center-block" method="POST" action="">
+                    {% csrf_token %}
+                    <center>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="firstname" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control input-lg" name="email" placeholder="Email-ID" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-warning btn-lg btn-block">Start Test</button>
+                        </div>
+                    </center>
+                </form>
             </div>
-
-            <div class="row">
-                <div class="col-md-6" style="border-right:1px solid gray;">
-                    <form class="form col-md-12 center-block" method="POST" action="">
-                        {% csrf_token %}
-                        <center>
-                            <table class="table">
-                                <tr>
-                                    <th><label for="id_username">Username:</label></th>
-                                    <td><input type="text" class="form-control input-lg" name="email" placeholder="Email" required></td>
-                                </tr>
-                                <tr>
-                                    <th><label for="id_password">Password:</label></th>
-                                    <td><input type="password" class="form-control input-lg" name="pwd" placeholder="Password"
-                                            required></td>
-                                </tr>
-                            </table>
-                        </center>
-
-                        <button class="btn btn-primary" type="submit">Submit Details</button>
-                        <a class="btn btn-primary" href="/yourtest">Start Test</a>
-
-                    </form>
-                </div>
-                <div class="col-md-6">
-                    <p> Online Test Interface for conducting online programming quiz.
-                        <ul>
-                            <li>Define fairly complicated programming problems and have users solve the problem. </li>
-                            <li>Immediate verification of code solution. </li>
-                            <li>Supports pretty much arbitrary programming questions in Python, C, C++ and simple Bash and uses
-                                "test cases" to test the implementations of the students.</li>
-                            <li>Supports simple multiple choice questions and File uploads.</li>
-                            <li>Since it runs on your Python, you could technically test any Python based library.</li>
-                            <li>Scales to over 500+ simultaneous users.</li>
-                        </ul>
-                    </p>
-                </div>
+            <div class="col-md-8">
+                <h2>
+                    Read the instructions carefully before starting
+                    <hr>
+                </h2>
+                <ul>
+                    <li>Define fairly complicated programming problems and have users solve the problem. </li>
+                    <li>Immediate verification of code solution. </li>
+                    <li>Supports pretty much arbitrary programming questions in Python, C, C++ and simple Bash and uses "test
+                        cases" to test the implementations of the students.</li>
+                    <li>Supports simple multiple choice questions and File uploads.</li>
+                    <li>Since it runs on your Python, you could technically test any Python based library.</li>
+                    <li>Scales to over 500+ simultaneous users.</li>
+                </ul>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <p align="center">Developed for HackNIEC</p>
-            </div>
-        </footer>
+    </div>
+    <br><br>
+
+    <div class="container">
+        <hr>
+        <center>
+            <h4><b> Developed for HackNIEC</b> </h4>
+        </center>
     </div>
 </body>
 
