@@ -1,8 +1,5 @@
 <!doctype html> {% load static %}
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js" lang="">
 <!--<![endif]-->
 
@@ -10,37 +7,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>
-
-
     </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
     <link rel="stylesheet" href="/static/onlinetest/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/onlinetest/css/font-awesome.css" type="text/css" />
     <link rel="stylesheet" href="/static/onlinetest/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="/static/onlinetest/css/sticky-footer.css" type="text/css" />
     <link rel="stylesheet" href="/static/onlinetest/css/dashboard.css" type="text/css" />
-
-
-
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-
-
     <script language="JavaScript" type="text/javascript" src="/static/onlinetest/js/jquery-1.9.1.min.js"></script>
     <script src="/static/onlinetest/js/bootstrap.min.js"></script>
-
-
 </head>
-
 <body>
-
-
     <div class="container">
         <div class="content">
             <div class="header">
@@ -48,7 +27,6 @@
                     <center>ONLINE TEST</center>
                     </h2>
             </div>
-
             <div class="row">
                 <div class="col-md-6" style="border-right:1px solid gray;">
                     <form class="form col-md-12 center-block" method="POST" action="{% url 'onlinetest:clientloginval' %}">
@@ -61,7 +39,8 @@
                                 </tr>
                                 <tr>
                                     <th><label for="id_password">Password:</label></th>
-                                    <td><input type="password" class="form-control input-lg" name="pwd" placeholder="Password" required></td>
+                                    <td><input type="password" class="form-control input-lg" name="pwd" placeholder="Password"
+                                            required></td>
                                 </tr>
                             </table>
                         </center>
@@ -83,7 +62,8 @@
                         <ul>
                             <li>Define fairly complicated programming problems and have users solve the problem. </li>
                             <li>Immediate verification of code solution. </li>
-                            <li>Supports pretty much arbitrary programming questions in Python, C, C++ and simple Bash and uses "test cases" to test the implementations of the students.</li>
+                            <li>Supports pretty much arbitrary programming questions in Python, C, C++ and simple Bash and uses
+                                "test cases" to test the implementations of the students.</li>
                             <li>Supports simple multiple choice questions and File uploads.</li>
                             <li>Since it runs on your Python, you could technically test any Python based library.</li>
                             <li>Scales to over 500+ simultaneous users.</li>
@@ -91,8 +71,6 @@
                     </p>
                 </div>
             </div>
-
-
         </div>
         <footer class="footer">
             <div class="container">
@@ -100,7 +78,6 @@
             </div>
         </footer>
     </div>
-
 </body>
 
 </html>
