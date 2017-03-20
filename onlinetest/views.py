@@ -3,41 +3,66 @@ from django.core.exceptions import ObjectDoesNotExist #This may be used instead 
 from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
+from .forms import LoginForm
+from .forms import SignupForm
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 import ast
-
-#from .models import Users
+from .models import Users
 #from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
 
 
 def index(request):
-    if request.session.has_key('user_id'):
-        uid=request.session['user_id']
-        try:
-            user=Users.objects.get(pk=uid)
-            return render(request, 'onlinetest/logged.html',{'user_id':user})
-        except Users.DoesNotExist:
-            return HttpResponse("UserName not found")
-    else:
-        return render(request, 'onlinetest/main.html')
+    # if request.session.has_key('user_id'):
+    #     uid=request.session['user_id']
+    #     try:
+    #         user=Users.objects.get(pk=uid)
+    #         return render(request, 'onlinetest/logged.html',{'user_id':user})
+    #     except Users.DoesNotExist:
+    #         return HttpResponse("Email not found")
+    # else:
+            return render(request, 'onlinetest/index.html')
+    
 
-def login(request):
-    return render(request, 'onlinetest/login.html')
+def studentlogin(request):
+    return render(request, 'onlinetest/studentlogin.html')
 
-def signup(request):
-    return render(request, 'onlinetest/signup.html')
+def clientlogin(request):
+    return render(request, 'onlinetest/clientlogin.html')
 
-def logInReq(request):
+def clientregister(request):
+    return render(request, 'onlinetest/clientregister.html')
+
+def clientadmin(request):
+    return render(request, 'onlinetest/clientadmin.html')
+
+def studenthome(request):
+    return render(request, 'onlinetest/studenthome.html')
+
+def yourtest(request):
+    return render(request, 'onlinetest/yourtest.html')
+
+def clientloginval(request):
     if request.method == 'POST':
         log=LoginForm(request.POST)
         if log.is_valid():
             try:
-                user=Users.objects.get(user_name=log.cleaned_data.get('username'),pwd=log.cleaned_data.get('pwd'))
+                user=Users.objects.get(email=log.cleaned_data.get('email'),pwd=log.cleaned_data.get('pwd'))
                 request.session['user_id'] = user.id
-                return HttpResponseRedirect(reverse('main:index'))
+                return HttpResponseRedirect(reverse('onlinetest:clientadmin'))
             except Users.DoesNotExist:
-                return HttpResponse("WRONG USERNAME OR PASSWORD")
+                return HttpResponse("Wrong Username Password")
+
+def studentloginval(request):
+    if request.method == 'POST':
+        log=LoginForm(request.POST)
+        if log.is_valid():
+            try:
+                user=Users.objects.get(email=log.cleaned_data.get('email'),pwd=log.cleaned_data.get('pwd'))
+                request.session['user_id'] = user.id
+                return HttpResponseRedirect(reverse('onlinetest:studenthome'))
+            except Users.DoesNotExist:
+                return HttpResponse("Wrong Username Password")
 
 def register(request):
     if request.method == 'POST':
@@ -50,5 +75,5 @@ def register(request):
             )
             p.save()
             request.session['user_id'] = p.id
-    return HttpResponseRedirect(reverse('main:index'))
+    return HttpResponseRedirect(reverse('onlinetest:clientadmin'))
 

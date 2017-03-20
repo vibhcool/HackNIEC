@@ -7,7 +7,7 @@ class SignupForm(forms.Form):
     pwd= forms.CharField(max_length=80)
 
 class LoginForm(forms.Form):
-    username=forms.CharField(max_length = 80)
+    email=forms.CharField(max_length = 80)
     pwd= forms.CharField(max_length=80)
 
 """
