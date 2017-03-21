@@ -22,3 +22,27 @@ class studentProfile(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class question(models.Model):
+    """questions in ques paper"""
+    ques_paper_id = models.CharField(max_length=50)
+    questionNo = models.CharField(max_length=30)
+    question = models.CharField(max_length=500, unique=True)
+    option1 = models.CharField(max_length=100)
+    option2 = models.CharField(max_length=100)
+    option3 = models.CharField(max_length=100)
+    option4 = models.CharField(max_length=100)
+    answer = models.CharField(max_length=500)
+    questionType = models.CharField(max_length=10)
+
+class quesFile(models.Model):
+    """ques paper"""
+    ques_paper_id = models.CharField(max_length=50)
+    client = models.CharField(max_length=50)
+
+class studentMark(models.Model):
+    """student marks"""
+    ques_paper_id = models.CharField(max_length=50)
+    email = models.EmailField(max_length=120, unique=True)
+    marks = models.CharField(max_length=50)
