@@ -133,7 +133,7 @@ def simple_upload(request):
         filename = fs.save(now + ext, myfile)
 
         onlinetest.file_reader.file_to_db(filename, str(request.session['user_id']))
-        return HttpResponse("now" + filename + "request.session['user_id']" + str(request.session['user_id']))
+        #return HttpResponse("now" + filename + "request.session['user_id']" + str(request.session['user_id']))
         
         uploaded_file_url = fs.url(filename)
         return render(request, 'onlinetest/clientadmin.html', {
