@@ -1,6 +1,7 @@
 from django.conf.urls import url
-
+from HackNIEC import settings
 from . import views
+from django.conf.urls.static import static
 
 
 app_name = 'onlinetest' 
@@ -21,6 +22,7 @@ urlpatterns = [
     url(r'^yourtest$', views.yourtest, name='yourtest'),
     url(r'^studentInfo', views.studentInfo, name='studentInfo'),
     url(r'^clientlogout$', views.clientlogout, name='clientlogout'),
+    url(r'^simple_upload', views.simple_upload, name='simple_upload'),
 
 
     #url to log in a user:
@@ -31,3 +33,5 @@ urlpatterns = [
     #url(r'^register$',views.register, name='register')
     
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

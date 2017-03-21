@@ -1,3 +1,4 @@
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist #This may be used instead of Users.DoesNotExist
 from django.http import HttpResponse,HttpResponseRedirect
@@ -16,7 +17,7 @@ from .models import Users, studentProfile
 
 def index(request):
             return render(request, 'onlinetest/index.html')
-    
+
 
 def studentlogin(request):
     return render(request, 'onlinetest/studentlogin.html')
@@ -101,3 +102,15 @@ def studentInfo(request):
             p.save()
             request.session['user_id'] = p.id
     return HttpResponseRedirect(reverse('onlinetest:yourtest'))
+
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'onlinetest/clientadmin.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'onlinetest/clientadmin.html')

@@ -29,6 +29,7 @@ class AddOpinionForm(forms.Form):
     topic = forms.CharField(max_length = 5)
 """
 
+
 class SearchForm(forms.Form):
     topic_text=forms.CharField(max_length = 250)
     #symptom=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,required=False)

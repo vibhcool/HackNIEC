@@ -1,6 +1,7 @@
 import csv
 import openpyxl
 import os
+from .models import Users, studentProfile, question, quesFile, studentMark
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -28,13 +29,11 @@ def read_csv(filename):
                 data[i][j] = row_cell
                 j += 1
             i += 1
+    data['filename'] = filename
         #print(data)
         return data
 
-def write_db(data):
-    '''write to database'''
     
-
 def read_xl(filename):
     '''read excel file'''
     wb = openpyxl.load_workbook(root_path + '/static/onlinetest/docs/' + filename)
@@ -53,10 +52,13 @@ def read_xl(filename):
             data[row-2] = {}
             for col in range(2,col_count):
                 data[row-2][col-2] = i.cell(column=col, row=row).value
+    data['filename'] = filename
     #print(data)
     return data
 
-
+def write_db(data):
+    '''write to database'''
+    user=.objects.get(user_name=log.cleaned_data.get('username'),pwd=log.cleaned_data.get('pwd'))
         
 #read_xl('quesformat.xlsx')
 
