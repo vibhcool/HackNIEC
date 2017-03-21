@@ -13,7 +13,7 @@ from .models import Users, studentProfile, question, quesFile, studentMark
 import onlinetest.file_reader
 import datetime
 import random
-
+from Crypto.Cipher import AES
 
 def index(request):
             return render(request, 'onlinetest/index.html')
