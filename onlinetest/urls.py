@@ -24,14 +24,7 @@ urlpatterns = [
     url(r'^studentInfo', views.studentInfo, name='studentInfo'),
     url(r'^clientlogout$', views.clientlogout, name='clientlogout'),
     url(r'^simple_upload', views.simple_upload, name='simple_upload'),
-
-
-    #url to log in a user:
-   # url(r'^log_req$', views.logInReq, name='login_req'),
-
-    #url for create-user:
-    #url(r'^register_user$', views.register, name='register_user'),
-    #url(r'^register$',views.register, name='register')
+    url(r'^register$',views.register, name='register'),
     
 ]
 if settings.DEBUG:

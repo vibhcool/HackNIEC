@@ -5,12 +5,12 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from .forms import LoginForm
-from .forms import SignupForm,studenLoginForm,StudentInfo
+from .forms import SignupForm,studenLoginForm,StudentInfo,TestIdVal
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 import ast
 from .models import Users, studentProfile, question, quesFile, studentMark
-
+import onlinetest.file_reader
 import datetime
 
 #from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
@@ -44,6 +44,8 @@ def studenthome(request):
     return render(request, 'onlinetest/studenthome.html')
 
 def yourtest(request):
+    test_id = request.session.get('test_id')
+    
     return render(request, 'onlinetest/yourtest.html')
 
 def clientloginval(request):
@@ -67,14 +69,14 @@ def clientlogout(request):
 
 def studentloginval(request):
     if request.method == 'POST':
-        log=LoginForm(request.POST)
-        if log.is_valid():
-            try:
-                user=Users.objects.get(email=log.cleaned_data.get('email'),pwd=log.cleaned_data.get('pwd'))
-                request.session['user_id'] = user.id
-                return HttpResponseRedirect(reverse('onlinetest:studenthome'))
-            except Users.DoesNotExist:
-                return HttpResponse("Wrong Username Password")
+        test_id = request.POST.get('test_id')
+        try:
+            testfile_id = quesFile.objects.get(ques_paper_id=test_id)
+            request.session['test_id'] = test_id
+        except quesFile.DoesNotExist:
+            return HttpResponse("Wrong Username Password")
+        #return HttpResponse("car " + test_id)
+        return render(request, 'onlinetest/studenthome.html')        
 
 def studentLogincheck(request):
     if request.method == 'POST':
@@ -124,11 +126,14 @@ def simple_upload(request):
         now = str(datetime.datetime.now().strftime("%Y%m%d%H%M"))
         ques_paper=quesFile.objects.create(ques_paper_id=now, client=request.session['user_id'])
         ques_paper.save()
-
+        
         myfile = request.FILES['myfile']
         ext = myfile.name[myfile.name.rfind('.'):]
         fs = FileSystemStorage()
         filename = fs.save(now + ext, myfile)
+
+        onlinetest.file_reader.file_to_db(filename, request.session['user_id'])
+
         uploaded_file_url = fs.url(filename)
         return render(request, 'onlinetest/clientadmin.html', {
             'uploaded_file_url': uploaded_file_url

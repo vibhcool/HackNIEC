@@ -36,3 +36,7 @@ class AddOpinionForm(forms.Form):
 class SearchForm(forms.Form):
     topic_text=forms.CharField(max_length = 250)
     #symptom=forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,required=False)
+
+
+class TestIdVal(forms.Form):
+    test_id=forms.CharField(max_length = 250)

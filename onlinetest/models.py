@@ -9,7 +9,7 @@ class Users(models.Model):
     #no_of_topics=models.IntegerField(default=0)
     #type_user=models.IntegerField(default=0) #simple=0 org=1
     def __str__(self):
-        return self.user_name
+        return self.email
 
 class studentProfile(models.Model):
     """Profile for a user to store roll number and other details."""
@@ -34,7 +34,7 @@ class question(models.Model):
 
 class quesFile(models.Model):
     """ques paper"""
-    ques_paper_id = models.CharField(max_length=50)
+    ques_paper_id = models.CharField(max_length=50, unique=True)
     client = models.CharField(max_length=50)
 
 class studentMark(models.Model):
@@ -42,9 +42,4 @@ class studentMark(models.Model):
     ques_paper_id = models.CharField(max_length=50)
     email = models.EmailField(max_length=120, unique=True)
     marks = models.CharField(max_length=50)
-
-class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True)
-    document = models.FileField(upload_to='docs/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
 

@@ -1,19 +1,21 @@
 import csv
 import openpyxl
 import os
-from models import Users, studentProfile, question, quesFile, studentMark
+from .models import Users, studentProfile, question, quesFile, studentMark
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
-def file_to_db(filename):
+def file_to_db(filename, client_name):
     '''main function: write file to database'''
     if filename[:-3] == 'csv':
-        read_csv(filename)
+        data = read_csv(filename)
+        write_db(data, client_name)        
     elif filename[:-3] == 'xlsx' or filename[:-3] == 'xls':
         read_xl(filename)
+        write_db(data, client_name)
     else:
         print('error')
-
+    
 def read_csv(filename):
     '''read csv file'''
     with open(root_path + '/static/onlinetest/docs/' + filename) as csvfile:
@@ -60,8 +62,8 @@ def write_db(data, client_name):
     '''write to database'''
     ques_paper=quesFile.objects.get(ques_paper_id=filename, client=client_name)
     for i in data:
-        ques=question.objects.get(
-            ques_paper_id=filename + '_' + data[i.key()].get(0),
+        ques=question.objects.create(
+            question_id=filename + '_' + data[i.key()].get(0),
             question=data.get(1),
             option1=data.get(2),
             option2=data.get(3),
