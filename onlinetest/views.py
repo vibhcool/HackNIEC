@@ -4,8 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist #This may be used instead 
 from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
-from .forms import LoginForm, StudentInfo
-from .forms import SignupForm
+from .forms import LoginForm
+from .forms import SignupForm,studenLoginForm,StudentInfo
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 import ast
@@ -76,6 +76,18 @@ def studentloginval(request):
             except Users.DoesNotExist:
                 return HttpResponse("Wrong Username Password")
 
+def studentLogincheck(request):
+    if request.method == 'POST':
+        log=studenLoginForm(request.POST)
+        if log.is_valid():
+            try:
+                #return HttpResponse("email" + log.cleaned_data.get('email') + "pass" + log.cleaned_data.get('password'))
+                user = studentProfile.objects.get(email=log.cleaned_data.get('email'),password=log.cleaned_data.get('password'))
+                request.session['studentuid'] = user.id
+                return HttpResponseRedirect(reverse('onlinetest:yourtest'))
+            except Users.DoesNotExist:
+                return HttpResponse("Wrong Username Password")
+
 def register(request):
     if request.method == 'POST':
         signup=SignupForm(request.POST)
@@ -93,15 +105,16 @@ def studentInfo(request):
     if request.method == 'POST':
         addstudent=StudentInfo(request.POST)
         if addstudent.is_valid():
-            p=studentProfile(
+            p=studentProfile.objects.create(
                 name=addstudent.cleaned_data.get('name'),
                 email=addstudent.cleaned_data.get('email'),
-                roll_number=addstudent.cleaned_data.get('rollnumber'),
                 institute=addstudent.cleaned_data.get('institute'),
-                department=addstudent.cleaned_data.get('department'),
+                password=addstudent.cleaned_data.get('password')
             )
             p.save()
-            request.session['user_id'] = p.id
+            #return HttpResponse("yoyo" + p.id)
+            request.session['studentuid'] = p.id
+    #return HttpResponse("yoyo1" + addstudent.cleaned_data.get('name') + addstudent.cleaned_data.get('email') + addstudent.cleaned_data.get('institute') + addstudent.cleaned_data.get('password'))
     return HttpResponseRedirect(reverse('onlinetest:yourtest'))
 
 

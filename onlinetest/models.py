@@ -15,10 +15,8 @@ class studentProfile(models.Model):
     """Profile for a user to store roll number and other details."""
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=120, unique=True)
-    roll_number = models.CharField(max_length=20)
-    institute = models.CharField(max_length=128)
-    department = models.CharField(max_length=64)
-    created_time = models.DateTimeField(default=timezone.now)
+    password = models.CharField(max_length=50, default=None)
+    institute = models.CharField(max_length=50, default=None)
 
     def __str__(self):
         return self.email

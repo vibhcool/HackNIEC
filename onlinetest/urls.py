@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^clientadmin$', views.clientadmin, name='clientadmin'),
     url(r'^clientloginval$', views.clientloginval, name='clientloginval'),
     url(r'^studentloginval$', views.studentloginval, name='studentloginval'),
+    url(r'^studentLogincheck$', views.studentLogincheck, name='studentLogincheck'),
     url(r'^studenthome$', views.studenthome, name='studenthome'),
     url(r'^yourtest$', views.yourtest, name='yourtest'),
     url(r'^studentInfo', views.studentInfo, name='studentInfo'),
