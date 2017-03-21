@@ -17,6 +17,7 @@ class studentProfile(models.Model):
     email = models.EmailField(max_length=120, unique=True)
     password = models.CharField(max_length=50, default=None)
     institute = models.CharField(max_length=50, default=None)
+    client = models.CharField(max_length=50, default=None)
 
     def __str__(self):
         return self.email

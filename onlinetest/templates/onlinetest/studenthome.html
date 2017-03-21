@@ -41,9 +41,13 @@
             </div>
         </div>
     </nav>
+
     <br>
     <br><br>
     <br>
+    <br/>
+    <br/>
+    <center><div>Client No - {{ testfile_id.client }}</div></center>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -64,6 +68,9 @@
                         </div>
                         <div class="form-group">
                             <input type="number" class="abc" name="institute" placeholder="Roll No or any ID" required>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <input type="text" class="abc" name="client" value="{{ testfile_id.client }}" title="client">
                         </div>
                         <div class="form-group">
                             <button class="abcbut">Start Test</button>
