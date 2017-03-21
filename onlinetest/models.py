@@ -15,15 +15,11 @@ class studentProfile(models.Model):
     """Profile for a user to store roll number and other details."""
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=120, unique=True)
-    roll_number = models.CharField(max_length=20)
-    institute = models.CharField(max_length=128)
-    department = models.CharField(max_length=64)
-    created_time = models.DateTimeField(default=timezone.now)
+    password = models.CharField(max_length=50, default=None)
+    institute = models.CharField(max_length=50, default=None)
 
     def __str__(self):
         return self.email
-
-<<<<<<< HEAD
 
 class question(models.Model):
     """questions in ques paper"""
@@ -47,9 +43,8 @@ class studentMark(models.Model):
     ques_paper_id = models.CharField(max_length=50)
     email = models.EmailField(max_length=120, unique=True)
     marks = models.CharField(max_length=50)
-=======
+
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='docs/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
->>>>>>> d55ab49980f0a211e24eef3688faf67870b982d5
