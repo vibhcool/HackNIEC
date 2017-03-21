@@ -15,14 +15,6 @@ from .models import Users, studentProfile
 
 
 def index(request):
-    # if request.session.has_key('user_id'):
-    #     uid=request.session['user_id']
-    #     try:
-    #         user=Users.objects.get(pk=uid)
-    #         return render(request, 'onlinetest/logged.html',{'user_id':user})
-    #     except Users.DoesNotExist:
-    #         return HttpResponse("Email not found")
-    # else:
             return render(request, 'onlinetest/index.html')
     
 
@@ -36,16 +28,15 @@ def clientregister(request):
     return render(request, 'onlinetest/clientregister.html')
 
 def clientadmin(request):
-    if request.session.has_key('user_id'):
-        uid = request.session['user_id']
-        try:
-            user = Users.objects.get(pk=uid)
-            return render(request, 'onlinetest/clientadmin.html', {'user_id':user})
-        except Users.DoesNotExist:
-            return render(request, 'onlinetest/clientlogin.html')
-    else:
-        return render(request, 'onlinetest/clientlogin.html')
-    #return render(request, 'onlinetest/clientadmin.html')
+  if request.session.has_key('user_id'):
+         uid = request.session['user_id']
+         try:
+             user = Users.objects.get(pk=uid)
+             return render(request, 'onlinetest/clientadmin.html', {'user_id':user})
+         except Users.DoesNotExist:
+             return render(request, 'onlinetest/clientlogin.html')
+  else:
+         return render(request, 'onlinetest/clientlogin.html')
 
 def studenthome(request):
     return render(request, 'onlinetest/studenthome.html')
