@@ -1,5 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
+
 from .models import Users, studentProfile, question, quesFile, studentMark
 # Register your models here.
 admin.site.register(Users)
