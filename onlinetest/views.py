@@ -124,7 +124,7 @@ def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
 
         now = str(datetime.datetime.now().strftime("%Y%m%d%H%M"))
-        ques_paper=quesFile.objects.create(ques_paper_id=now, client=request.session['user_id'])
+        ques_paper=quesFile.objects.create(ques_paper_id=now, client=str(request.session['user_id']))
         ques_paper.save()
         
         myfile = request.FILES['myfile']
@@ -132,8 +132,9 @@ def simple_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(now + ext, myfile)
 
-        onlinetest.file_reader.file_to_db(filename, request.session['user_id'])
-
+        onlinetest.file_reader.file_to_db(filename, str(request.session['user_id']))
+        return HttpResponse("now" + filename + "request.session['user_id']" + str(request.session['user_id']))
+        
         uploaded_file_url = fs.url(filename)
         return render(request, 'onlinetest/clientadmin.html', {
             'uploaded_file_url': uploaded_file_url

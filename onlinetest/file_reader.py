@@ -7,10 +7,11 @@ root_path = os.path.dirname(os.path.abspath(__file__))
 
 def file_to_db(filename, client_name):
     '''main function: write file to database'''
-    if filename[:-3] == 'csv':
+    print(filename[-3:] + 'sdaasd')
+    if filename[-3:] == 'csv':
         data = read_csv(filename)
         write_db(data, client_name)        
-    elif filename[:-3] == 'xlsx' or filename[:-3] == 'xls':
+    elif filename[-4:] == 'xlsx' or filename[-3:] == 'xls':
         read_xl(filename)
         write_db(data, client_name)
     else:
@@ -60,20 +61,32 @@ def read_xl(filename):
 
 def write_db(data, client_name):
     '''write to database'''
-    ques_paper=quesFile.objects.get(ques_paper_id=filename, client=client_name)
+    #ques_paper=quesFile.objects.get(ques_paper_id=filename, client=client_name)
     for i in data:
+        if str(i) == 'filename':
+            break
         ques=question.objects.create(
-            question_id=filename + '_' + data[i.key()].get(0),
-            question=data.get(1),
-            option1=data.get(2),
-            option2=data.get(3),
-            option3=data.get(4),
-            option4=data.get(5),
-            answer=data.get(6),
-            questionType= data.get(7),
+            question_id=data[i].get(0),
+            question=data[i].get(1),
+            option1=data[i].get(2),
+            option2=data[i].get(3),
+            option3=data[i].get(4),
+            option4=data[i].get(5),
+            answer=data[i].get(6),
+            questionType=data[i].get(7),
     )
+    '''for i in data:
+        print(data[i].get(0))
+        print(data[i].get(1))
+        print(data[i].get(2))
+        print(data[i].get(3))
+        print(data[i].get(4))
+        print(data[i].get(5))
+        print(data[i].get(6))
+        print(data[i].get(7))
+     '''   
         
 #read_xl('quesformat.xlsx')
 
-#write_db(read_csv('file1.csv'),'yoyo')
+#file_to_db(read_csv('file1.csv','yoyo')
 
