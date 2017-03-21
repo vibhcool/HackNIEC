@@ -5,15 +5,15 @@ from .models import Users, studentProfile, question, quesFile, studentMark
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
-def file_to_db(filename, client_name):
+def file_to_db(filename, client_name, test_id):
     '''main function: write file to database'''
     print(filename[-3:] + 'sdaasd')
     if filename[-3:] == 'csv':
         data = read_csv(filename)
-        write_db(data, client_name)        
+        write_db(data, client_name, test_id)        
     elif filename[-4:] == 'xlsx' or filename[-3:] == 'xls':
         data = read_xl(filename)
-        write_db(data, client_name)
+        write_db(data, client_name, test_id)
     else:
         print('error')
     
@@ -61,14 +61,14 @@ def read_xl(filename):
     #print(data)
     return data
 
-def write_db(data, client_name):
+def write_db(data, client_name, file_id):
     '''write to database'''
     #ques_paper=quesFile.objects.get(ques_paper_id=filename, client=client_name)
     for i in data:
         if str(i) == 'filename':
             break
         ques=question.objects.create(
-            question_id=data['filename'][:data['filename'].rfind('.')] + str(data[i].get(0)),
+            question_id=file_id,
             question=data[i].get(1),
             option1=data[i].get(2),
             option2=data[i].get(3),

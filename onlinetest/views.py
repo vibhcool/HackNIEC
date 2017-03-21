@@ -12,8 +12,7 @@ import ast
 from .models import Users, studentProfile, question, quesFile, studentMark
 import onlinetest.file_reader
 import datetime
-
-#from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
+import random
 
 
 def index(request):
@@ -45,8 +44,10 @@ def studenthome(request):
 
 def yourtest(request):
     test_id = request.session.get('test_id')
-    
-    return render(request, 'onlinetest/yourtest.html')
+    #questions = []
+    questions = question.objects.filter(question_id=test_id)
+    random.shuffle(questions)
+    return render(request, 'onlinetest/yourtest.html',{'question': questions})
 
 def clientloginval(request):
     if request.method == 'POST':
@@ -132,7 +133,7 @@ def simple_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(now + ext, myfile)
 
-        onlinetest.file_reader.file_to_db(filename, str(request.session['user_id']))
+        onlinetest.file_reader.file_to_db(filename, str(request.session['user_id']), now)
         #return HttpResponse("now" + filename + "request.session['user_id']" + str(request.session['user_id']))
         
         uploaded_file_url = fs.url(filename)
