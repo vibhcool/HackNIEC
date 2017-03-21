@@ -23,12 +23,9 @@ class studentProfile(models.Model):
     def __str__(self):
         return self.email
 
-<<<<<<< HEAD
-
 class question(models.Model):
     """questions in ques paper"""
-    ques_paper_id = models.CharField(max_length=50)
-    questionNo = models.CharField(max_length=30)
+    question_id = models.CharField(max_length=30)
     question = models.CharField(max_length=500, unique=True)
     option1 = models.CharField(max_length=100)
     option2 = models.CharField(max_length=100)
@@ -47,9 +44,9 @@ class studentMark(models.Model):
     ques_paper_id = models.CharField(max_length=50)
     email = models.EmailField(max_length=120, unique=True)
     marks = models.CharField(max_length=50)
-=======
+
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='docs/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
->>>>>>> d55ab49980f0a211e24eef3688faf67870b982d5
+

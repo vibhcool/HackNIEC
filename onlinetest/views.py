@@ -9,8 +9,9 @@ from .forms import SignupForm
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 import ast
-from .models import Users, studentProfile
+from .models import Users, studentProfile, question, quesFile, studentMark
 
+import datetime
 
 #from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
 
@@ -106,9 +107,15 @@ def studentInfo(request):
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
+
+        now = str(datetime.datetime.now().strftime("%Y%m%d%H%M"))
+        ques_paper=quesFile.objects.create(ques_paper_id=now, client=request.session['user_id'])
+        ques_paper.save()
+
         myfile = request.FILES['myfile']
+        ext = myfile.name[myfile.name.rfind('.'):]
         fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
+        filename = fs.save(now + ext, myfile)
         uploaded_file_url = fs.url(filename)
         return render(request, 'onlinetest/clientadmin.html', {
             'uploaded_file_url': uploaded_file_url

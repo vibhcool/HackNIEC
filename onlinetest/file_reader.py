@@ -1,7 +1,7 @@
 import csv
 import openpyxl
 import os
-from .models import Users, studentProfile, question, quesFile, studentMark
+from models import Users, studentProfile, question, quesFile, studentMark
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -15,7 +15,7 @@ def file_to_db(filename):
         print('error')
 
 def read_csv(filename):
-   '''read csv file'''
+    '''read csv file'''
     with open(root_path + '/static/onlinetest/docs/' + filename) as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
         data = {}
@@ -31,7 +31,7 @@ def read_csv(filename):
             i += 1
     data['filename'] = filename
         #print(data)
-        return data
+    return data
 
     
 def read_xl(filename):
@@ -56,10 +56,22 @@ def read_xl(filename):
     #print(data)
     return data
 
-def write_db(data):
+def write_db(data, client_name):
     '''write to database'''
-    user=.objects.get(user_name=log.cleaned_data.get('username'),pwd=log.cleaned_data.get('pwd'))
+    ques_paper=quesFile.objects.get(ques_paper_id=filename, client=client_name)
+    for i in data:
+        ques=question.objects.get(
+            ques_paper_id=filename + '_' + data[i.key()].get(0),
+            question=data.get(1),
+            option1=data.get(2),
+            option2=data.get(3),
+            option3=data.get(4),
+            option4=data.get(5),
+            answer=data.get(6),
+            questionType= data.get(7),
+    )
         
 #read_xl('quesformat.xlsx')
 
-#read_csv('file1.csv')
+#write_db(read_csv('file1.csv'),'yoyo')
+
