@@ -12,86 +12,124 @@
         crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,700,800' rel='stylesheet'
         type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
     <link href='https://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'onlinetest/css/style1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'onlinetest/css/imagehover.min.css' %}" type="text/css" />
 </head>
 
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a class="navbar-brand" href="index.html">ONLINE <span>TEST</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/studentlogin">Students Area</a></li>
+                    <li><a href="/clientlogin">Client Area</a></li>
+
+                    <li class="btn-trial"><a href="/">It's Free  </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br><br>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h2>
-                    Student Home
-                    <hr>
-                </h2>
+                <center>
+                    <h3>Register</h3>
+                </center><br>
                 <form class="form col-md-12 center-block" method="POST" action="{% url 'onlinetest:studentInfo' %}">
                     {% csrf_token %}
                     <center>
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="name" placeholder="Your Name" required>
+                            <input type="text" class="abc" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control input-lg" name="email" placeholder="Email-ID" required>
+                            <input type="email" class="abc" name="email" placeholder="Email-ID" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control input-lg" name="password" placeholder="Password" required>
+                            <input type="password" class="abc" name="password" placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control input-lg" name="institute" placeholder="Roll No or any ID" required>
+                            <input type="number" class="abc" name="institute" placeholder="Roll No or any ID" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-warning btn-lg btn-block">Signup</button>
+                            <button class="abcbut">Start Test</button>
                         </div>
                     </center>
                 </form>
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div class="col-md-4" style="float:right;">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <center>
+                    <h3> Sign In</h3>
+                </center><br>
                 <form class="form col-md-12 center-block" method="POST" action="{% url 'onlinetest:studentLogincheck' %}">
                     {% csrf_token %}
                     <center>
                         <div class="form-group">
-                            <input type="email" class="form-control input-lg" name="email" placeholder="Email-ID" required>
+                            <input type="email" class="abc" name="email" placeholder="Email-ID" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control input-lg" name="password" placeholder="Password" required>
+                            <input type="password" class="abc" name="password" placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-warning btn-lg btn-block" type="submit">Login & Start Test</button>
+                            <button class="abcbut" type="submit">Start Test</button>
                         </div>
                     </center>
                 </form>
             </div>
-            </div>
-            <div class="col-md-8">
-                <h2>
-                    Read the instructions carefully before starting
-                    <hr>
-                </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+               <h3 style="padding-left: 40px"> IMPORTANT INSTRUCTIONS </h3>
                 <ul>
-                    <li>Define fairly complicated programming problems and have users solve the problem. </li>
-                    <li>Immediate verification of code solution. </li>
-                    <li>Supports pretty much arbitrary programming questions in Python, C, C++ and simple Bash and uses "test
-                        cases" to test the implementations of the students.</li>
-                    <li>Supports simple multiple choice questions and File uploads.</li>
-                    <li>Since it runs on your Python, you could technically test any Python based library.</li>
-                    <li>Scales to over 500+ simultaneous users.</li>
+                    <li>1) Close all tabs in your browser.</li>
+                    <li>2) Donot refresh or close the window during the test.</li>
+                    <li>3) Students must not stop the session and then return to it.
+                    </li>
+                    <li>4) Make sure that you have a stable internet connection.</li>
+                    <li>5) Internet Explorer 9, Firefox 1, or Google Chrome are required to log into the exam. </li>
+                    <li>6) The student may not use his or her textbook, course notes, or receive help from a proctor or any other
+                        outside source. </li>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </div>
-    <br><br>
+    <br>
 
-    <div class="container">
-        <hr>
-        <center>
-            <h4><b> Developed for HackNIEC</b> </h4>
-        </center>
-    </div>
+    <br>
+    <center>
+        <footer id="footer" class="footer">
+            <br> ©2017 Open Source. All rights exploited
+            <div class="credits">
+                Designed and Developed for <a href="/"><b> HackNIEC</b></a><br>
+                <br>
+                <br>
+            </div>
+            </div>
+        </footer>
+    </center>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" Async></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" Async integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
