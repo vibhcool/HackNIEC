@@ -3,12 +3,14 @@ from django.core.exceptions import ObjectDoesNotExist #This may be used instead 
 from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
-from .forms import LoginForm
+from .forms import LoginForm, StudentInfo
 from .forms import SignupForm
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 import ast
-from .models import Users
+from .models import Users, studentProfile
+
+
 #from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
 
 
@@ -34,7 +36,16 @@ def clientregister(request):
     return render(request, 'onlinetest/clientregister.html')
 
 def clientadmin(request):
-    return render(request, 'onlinetest/clientadmin.html')
+    if request.session.has_key('user_id'):
+        uid = request.session['user_id']
+        try:
+            user = Users.objects.get(pk=uid)
+            return render(request, 'onlinetest/clientadmin.html', {'user_id':user})
+        except Users.DoesNotExist:
+            return render(request, 'onlinetest/clientlogin.html')
+    else:
+        return render(request, 'onlinetest/clientlogin.html')
+    #return render(request, 'onlinetest/clientadmin.html')
 
 def studenthome(request):
     return render(request, 'onlinetest/studenthome.html')
@@ -49,9 +60,17 @@ def clientloginval(request):
             try:
                 user=Users.objects.get(email=log.cleaned_data.get('email'),pwd=log.cleaned_data.get('pwd'))
                 request.session['user_id'] = user.id
+                useremail = user.email
                 return HttpResponseRedirect(reverse('onlinetest:clientadmin'))
             except Users.DoesNotExist:
                 return HttpResponse("Wrong Username Password")
+
+def clientlogout(request):
+        try:
+            del request.session['user_id']
+        except:
+            pass
+        return HttpResponseRedirect(reverse('onlinetest:index'))
 
 def studentloginval(request):
     if request.method == 'POST':
@@ -77,3 +96,17 @@ def register(request):
             request.session['user_id'] = p.id
     return HttpResponseRedirect(reverse('onlinetest:clientadmin'))
 
+def studentInfo(request):
+    if request.method == 'POST':
+        addstudent=StudentInfo(request.POST)
+        if addstudent.is_valid():
+            p=studentProfile(
+                name=addstudent.cleaned_data.get('name'),
+                email=addstudent.cleaned_data.get('email'),
+                roll_number=addstudent.cleaned_data.get('rollnumber'),
+                institute=addstudent.cleaned_data.get('institute'),
+                department=addstudent.cleaned_data.get('department'),
+            )
+            p.save()
+            request.session['user_id'] = p.id
+    return HttpResponseRedirect(reverse('onlinetest:yourtest'))

@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^studentloginval$', views.studentloginval, name='studentloginval'),
     url(r'^studenthome$', views.studenthome, name='studenthome'),
     url(r'^yourtest$', views.yourtest, name='yourtest'),
+    url(r'^studentInfo', views.studentInfo, name='studentInfo'),
+    url(r'^clientlogout$', views.clientlogout, name='clientlogout'),
 
 
     #url to log in a user:

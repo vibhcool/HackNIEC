@@ -23,7 +23,7 @@
                     Student Home
                     <hr>
                 </h2>
-                <form class="form col-md-12 center-block" method="POST" action="">
+                <form class="form col-md-12 center-block" method="POST" action="{% url 'onlinetest:studentInfo' %}">
                     {% csrf_token %}
                     <center>
                         <div class="form-group">
@@ -31,6 +31,15 @@
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control input-lg" name="email" placeholder="Email-ID" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control input-lg" name="rollnumber" placeholder="Roll No" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="institute" placeholder="Institute" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="department" placeholder="Department" required>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-warning btn-lg btn-block">Start Test</button>

@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 
 
@@ -9,6 +10,13 @@ class SignupForm(forms.Form):
 class LoginForm(forms.Form):
     email=forms.CharField(max_length = 80)
     pwd= forms.CharField(max_length=80)
+
+class StudentInfo(forms.Form):
+    email = forms.EmailField(max_length=120)
+    name = forms.CharField(max_length=30)
+    roll_number = forms.CharField(max_length=30, help_text="Use a dummy if you don't have one.")
+    institute = forms.CharField(max_length=128, help_text='Institute/Organization')
+    department = forms.CharField(max_length=64, help_text='Department you work/study at')
 
 """
 class AddTopicForm(forms.Form):
