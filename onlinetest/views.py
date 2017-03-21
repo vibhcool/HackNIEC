@@ -34,7 +34,7 @@ def clientadmin(request):
          uid = request.session['user_id']
          try:
              user = Users.objects.get(pk=uid)
-             return render(request, 'onlinetest/clientadmin.html', {'user_id':user})
+             return render(request, 'onlinetest/clientadmin.html', {'user_id': user})
          except Users.DoesNotExist:
              return render(request, 'onlinetest/clientlogin.html')
   else:
@@ -45,7 +45,7 @@ def studenthome(request):
 
 def yourtest(request):
     test_id = request.session.get('test_id')
-    
+
     return render(request, 'onlinetest/yourtest.html')
 
 def clientloginval(request):
@@ -76,7 +76,7 @@ def studentloginval(request):
         except quesFile.DoesNotExist:
             return HttpResponse("Wrong Username Password")
         #return HttpResponse("car " + test_id)
-        return render(request, 'onlinetest/studenthome.html')        
+        return render(request, 'onlinetest/studenthome.html', {'testfile_id':testfile_id})
 
 def studentLogincheck(request):
     if request.method == 'POST':
@@ -111,7 +111,8 @@ def studentInfo(request):
                 name=addstudent.cleaned_data.get('name'),
                 email=addstudent.cleaned_data.get('email'),
                 institute=addstudent.cleaned_data.get('institute'),
-                password=addstudent.cleaned_data.get('password')
+                password=addstudent.cleaned_data.get('password'),
+                client=addstudent.cleaned_data.get('client')
             )
             p.save()
             #return HttpResponse("yoyo" + p.id)
@@ -126,7 +127,7 @@ def simple_upload(request):
         now = str(datetime.datetime.now().strftime("%Y%m%d%H%M"))
         ques_paper=quesFile.objects.create(ques_paper_id=now, client=str(request.session['user_id']))
         ques_paper.save()
-        
+
         myfile = request.FILES['myfile']
         ext = myfile.name[myfile.name.rfind('.'):]
         fs = FileSystemStorage()
@@ -134,9 +135,14 @@ def simple_upload(request):
 
         onlinetest.file_reader.file_to_db(filename, str(request.session['user_id']))
         #return HttpResponse("now" + filename + "request.session['user_id']" + str(request.session['user_id']))
-        
+
         uploaded_file_url = fs.url(filename)
         return render(request, 'onlinetest/clientadmin.html', {
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'onlinetest/clientadmin.html')
+
+
+def studentinfodisplay(request):
+    tabledata = studentProfile.objects.all()
+    return render(request, 'onlinetest/studentinfodisplay.html', {'tabledata': tabledata})

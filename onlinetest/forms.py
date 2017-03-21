@@ -20,6 +20,7 @@ class StudentInfo(forms.Form):
     name = forms.CharField(max_length=30)
     institute = forms.CharField(max_length=50)
     password = forms.CharField(max_length=50)
+    client = forms.CharField(max_length=50)
 
 """
 class AddTopicForm(forms.Form):
