@@ -45,6 +45,8 @@ def clientadmin(request):
             return render(request, 'onlinetest/clientadmin.html', {'user_id': user, 'tabledata': tabledata, 'clientid': clientid})
         except Users.DoesNotExist:
             return render(request, 'onlinetest/clientlogin.html')
+        except quesFile.DoesNotExist:
+            return render(request, 'onlinetest/clientadmin.html')
     else:
         return render(request, 'onlinetest/clientlogin.html')
 
@@ -54,12 +56,11 @@ def studenthome(request):
 
 
 def yourtest(request):
-    test_id = request.session.get('test_id')
-    #questions = []
-    questions = question.objects.filter(question_id=test_id)
-    random.shuffle(questions)
+    global questions
     return render(request, 'onlinetest/yourtest.html',{'question': questions})
 
+#def get_question(request):
+    
 
 def clientloginval(request):
     if request.method == 'POST':
@@ -77,6 +78,7 @@ def clientloginval(request):
 def clientlogout(request):
     try:
         del request.session['user_id']
+        return HttpResponseRedirect(reverse('onlinetest:index'))
     except:
         pass
     return HttpResponseRedirect(reverse('onlinetest:index'))
@@ -95,6 +97,7 @@ def studentloginval(request):
 
 
 def studentLogincheck(request):
+    global questions
     if request.method == 'POST':
         log = studenLoginForm(request.POST)
         if log.is_valid():
@@ -103,6 +106,11 @@ def studentLogincheck(request):
                 user = studentProfile.objects.get(email=log.cleaned_data.get('email'),
                                                   password=log.cleaned_data.get('password'))
                 request.session['studentuid'] = user.id
+                test_id = request.session.get('test_id')
+                questions = []
+                questions.append(question.objects.filter(question_id=test_id))
+                random.shuffle(questions)
+    
                 return HttpResponseRedirect(reverse('onlinetest:yourtest'))
             except Users.DoesNotExist:
                 return HttpResponse("Wrong Username Password")
@@ -123,6 +131,7 @@ def register(request):
 
 
 def studentInfo(request):
+    global questions
     if request.method == 'POST':
         addstudent = StudentInfo(request.POST)
         if addstudent.is_valid():
@@ -136,8 +145,12 @@ def studentInfo(request):
             p.save()
             # return HttpResponse("yoyo" + p.id)
             request.session['studentuid'] = p.id
-    # return HttpResponse("yoyo1" + addstudent.cleaned_data.get('name') + addstudent.cleaned_data.get('email') + addstudent.cleaned_data.get('institute') + addstudent.cleaned_data.get('password'))
-    return HttpResponseRedirect(reverse('onlinetest:yourtest'))
+            test_id = request.session.get('test_id')
+            questions = []
+            questions.append(question.objects.filter(question_id=test_id))
+            random.shuffle(questions)
+    
+            return HttpResponseRedirect(reverse('onlinetest:yourtest'))
 
 
 def simple_upload(request):
