@@ -24,7 +24,7 @@ class studentProfile(models.Model):
 class question(models.Model):
     """questions in ques paper"""
     question_id = models.CharField(max_length=30)
-    question = models.CharField(max_length=500, unique=True)
+    question = models.CharField(max_length=500)
     option1 = models.CharField(max_length=100)
     option2 = models.CharField(max_length=100)
     option3 = models.CharField(max_length=100)

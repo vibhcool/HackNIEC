@@ -12,7 +12,7 @@ def file_to_db(filename, client_name):
         data = read_csv(filename)
         write_db(data, client_name)        
     elif filename[-4:] == 'xlsx' or filename[-3:] == 'xls':
-        read_xl(filename)
+        data = read_xl(filename)
         write_db(data, client_name)
     else:
         print('error')
@@ -29,7 +29,8 @@ def read_csv(filename):
             j = 0
             data_row = row[0].split(',')
             for row_cell in data_row:
-                data[i][j] = row_cell
+                a = row_cell 
+                data[i][j] = a if a != None else 'na'
                 j += 1
             i += 1
     data['filename'] = filename
@@ -51,10 +52,11 @@ def read_xl(filename):
         row_count = i.max_row
         col_count = i.max_column
         print(row_count, col_count)
-        for row in range(2,row_count):
-            data[row-2] = {}
-            for col in range(2,col_count):
-                data[row-2][col-2] = i.cell(column=col, row=row).value
+        for row in range(1,row_count):
+            data[row-1] = {}
+            for col in range(1,col_count):
+                a = i.cell(column=col, row=row).value
+                data[row-1][col-1] = a if a != None else 'na'
     data['filename'] = filename
     #print(data)
     return data
@@ -66,7 +68,7 @@ def write_db(data, client_name):
         if str(i) == 'filename':
             break
         ques=question.objects.create(
-            question_id=data[i].get(0),
+            question_id=data['filename'][:data['filename'].rfind('.')] + str(data[i].get(0)),
             question=data[i].get(1),
             option1=data[i].get(2),
             option2=data[i].get(3),
@@ -74,19 +76,22 @@ def write_db(data, client_name):
             option4=data[i].get(5),
             answer=data[i].get(6),
             questionType=data[i].get(7),
-    )
-    '''for i in data:
-        print(data[i].get(0))
-        print(data[i].get(1))
-        print(data[i].get(2))
-        print(data[i].get(3))
-        print(data[i].get(4))
-        print(data[i].get(5))
-        print(data[i].get(6))
-        print(data[i].get(7))
-     '''   
-        
+        )
+    '''
+    for i in data:
+        if str(i) == 'filename':
+            break
+        print(data['filename'][:data['filename'].rfind('.')] + str(data[i].get(0)),
+            ' ' + str(data[i].get(1)),
+        data[i].get(2),
+        data[i].get(3),
+        data[i].get(4),
+        data[i].get(5),
+        data[i].get(6),
+        data[i].get(7),
+        )
+    '''    
 #read_xl('quesformat.xlsx')
 
-#file_to_db(read_csv('file1.csv','yoyo')
+#file_to_db('quesformat1.xlsx','yoyo')
 
