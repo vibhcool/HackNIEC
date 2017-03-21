@@ -12,31 +12,44 @@
         crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600italic,700,800' rel='stylesheet'
         type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
     <link href='https://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{% static 'onlinetest/css/style.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'onlinetest/css/style1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'onlinetest/css/imagehover.min.css' %}" type="text/css" />
 </head>
 
 <body>
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar" aria-expanded="false">
-         <img src="{% static 'personal/images/navbar.png' %}" height="20px" width="30px" alt="+" />
-          </button>
-                <a class="navbar-brand" href="/">ONLINE TEST</a></div>
-            <div class="collapse navbar-collapse" id="mynavbar">
-                <ul class="nav navbar-nav navbar-left">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <a class="navbar-brand" href="index.html">ONLINE <span>TEST</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/studentlogin">Student</a></li>
-                    <li><a href="/clientlogin">Client</a></li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/studentlogin">Students Area</a></li>
+                    <li><a href="/clientlogin">Client Area</a></li>
+
+                    <li class="btn-trial"><a href="/">It's Free  </a></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <br>
+    <br><br>
+    <br>
     <div class="container">
-        <h1><b> CLIENT SignUp</b> </h1><br>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <center>
+                    <h3>Client Register</h3>
+                </center><br>
                 <form class="form col-md-12 center-block" method="POST" action="{% url 'onlinetest:register' %}">
                     {% csrf_token %}
                     <div class="form-group">
@@ -52,21 +65,31 @@
                         <input type="password" class="form-control input-lg" name="cpwd" placeholder="Confirm-Password" required>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-warning btn-lg btn-block">Sign Up</button> 
+                        <button class="btn btn-primary btn-lg btn-block">Sign Up</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<br>
+     <br>
 
-<br>
-    <div class="container">
-        <hr>
-        <center>
-            <h4><b> Developed for HackNIEC</b> </h4>
-        </center>
-    </div>
+    <br>
+    <center>
+        <footer id="footer" class="footer">
+            <br> ©2017 Open Source. All rights exploited
+            <div class="credits">
+                Designed and Developed for <a href="/"><b> HackNIEC</b></a><br>
+                <br>
+                <br>
+            </div>
+            </div>
+        </footer>
+    </center>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" Async></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" Async integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
 </body>
 
 </html>
