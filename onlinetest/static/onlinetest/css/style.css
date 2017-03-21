@@ -1,0 +1,234 @@
+html{
+height:100%;
+width:100%;
+background:#ff4c4c;
+}
+body{
+font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+padding-top:65px;
+min-height: 100%;
+}
+
+p{
+color:#000;
+}
+a{
+color:#1e4488;;
+outline:none;
+transition: all 0.2s linear 0s;
+}
+a:hover{
+color:#1e4488;;
+text-decoration:none;
+}
+a img{
+border:none;
+}
+hr{
+	border: 0;
+	height: 1px;
+	width:100%;
+	background-color:#CCCCCC;
+	color:#ccc;
+	clear:both;
+	margin:15px 0px;
+}
+h1, h2, h3, h4, h5, h6{
+ font-family: 'Open Sans', sans-serif;
+}
+.read-more{
+    background: none repeat scroll 0 0 #1e4488;;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 6px 15px;
+	display: inline-block;
+}
+.read-more:hover {
+    background: none repeat scroll 0 0 #000;
+    text-decoration: none;
+	color: #FFFFFF;
+}
+.navbar{ background:#1e4488; border-color:#1e4488;;}
+.navbar .navbar-brand{color:#fff; font-weight:700; font-size:30px; font-family: 'Open Sans',Arial,Helvetica,sans-serif;}
+.navbar .nav > li{list-style:none; border-left:1px solid #1e4488;; margin:0px;}
+.navbar .nav .active > a, .navbar .nav .active > a:hover, .navbar .nav .active > a:focus{ background-color:#1e4488;}
+.nav>li>a:hover {
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 2px;
+}
+.nav .open>a, .nav .open>a:hover {
+    background-color: #1e4488;;
+    border-color: #1e4488;;
+}
+
+.navbar .nav > li > a{ font-size:16px; font-weight:700; color:#fff;}
+.navbar .nav > li > a:hover{ color:#000;}
+
+.left-social{ margin:0px;}
+.left-social li a img{ width:32px; height:32px;}
+.left-social li{ padding:5px 0px 5px 0px; min-width:110px;}
+
+.nav-tabs{ list-style:none; margin:0px; border:none;}
+.nav-tabs li{ list-style:none;background:#1e4488;; margin:0px 0px 0px 1px;}
+.nav-tabs li:first-child{margin:0px 0px 0px 0px;}
+.nav-tabs li a{ color:#FFFFFF; border-radius:0px; outline:none; border:none; margin:0px;}
+.nav-tabs li a:hover{ background:#1e4488;; color:#323A45;outline:none;}
+.nav-tabs.nav-justified li.active a {
+    color: #323A45;
+    border-top: none;
+    border-left: none;
+	border-right: none;
+    outline: none;
+    border-radius: 0px;
+}
+.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover {
+    color: #323A45;
+    border-top: none;
+    border-left: none;
+	border-right: none;
+    outline: none;
+    border-radius: 0px;
+}
+.nav-tabs.nav-justified>li>a {
+     border-bottom: 1px solid #1e4488;;
+    border-radius: 4px 4px 0 0;
+}
+.tab-pane ul{ margin:0px;list-style:none;padding: 10px;}
+.tab-pane ul li:first-child{border-top:none;}
+.tab-pane ul li{
+     margin:0px;list-style:none;border-top: 1px dashed #DDDDDD;
+     padding: 10px 0;
+     }
+.tab-pane ul li a{color:#323A45;}
+.tab-pane ul li a:hover{color:#1e4488;;}
+
+.panel-default{ border:none;}
+.panel-default .panel-heading{background-color: #1e4488;;border:none;}
+.panel-default .panel-heading .panel-title{color:#FFFFFF;}
+.post-lists article{ border-top:1px solid #bbb;    padding:9.3px 0px;}
+.post-lists article .post-img img{ border:1px solid #fff;transition: all 0.2s linear 0s;}
+.post-lists article:first-child{ border-top:none; padding-top:0px;}
+.post-lists .entry-title{     margin: 0px 0px 6px 0px;}
+.post-lists .entry-title a{ color:#323A45;}
+.post-lists .entry-title a:hover{ color:#1e4488;;}
+.entry-summary { text-align: justify;margin-top: 10px;}
+.post-lists .entry-meta {clear: both; color: #999999;font-size: 12px;margin-bottom: 0.5em;}
+.post-lists .comments-link a{color:inherit;}
+.page-navigation {
+    border-top: 1px solid #DDDDDD;
+    clear: both;
+    float: none;
+    padding: 25px 0 0;
+    position: relative;
+}
+.page_navi {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+.page_navi li, .wp-prev-next li {
+    color: #BBBBBB;
+    margin-left: 0;
+}
+.page_navi li {
+    float: left;
+    list-style: none outside none;
+    margin-left: 10px;
+}
+.page_navi li .current {
+    background: none repeat scroll 0 0 #323A45;
+    color: #FFFFFF;
+}
+.page_navi li a:hover {
+    background: none repeat scroll 0 0 #323A45;
+    border-bottom: medium none;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.page_navi li a, .page_navi li span, .wp-prev-next li a {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-radius: 2px 2px 2px 2px;
+    color: #999999;
+    display: block;
+    font-weight: bold;
+    line-height: 1em;
+    margin: 0 3px;
+    padding: 5px 12px;
+    position: relative;
+    text-decoration: none;
+}
+.post-detail .read-more a{ color:#fff;}
+.post-detail .icon-eye-open{ margin-top:3px;}
+.entry-meta-single {
+    color: #999999;
+	font-size: 1em;
+    margin-bottom: 20px;
+}
+.entry-meta-single > span {
+    margin-right: 30px;
+}
+.entry-meta-single a{ font-weight:normal; color:#1e4488;;}
+.post-image{ clear:both; display:block;}
+.post-image img{ border:3px solid #bbb;clear:both; display:block;}
+.post-detail img{ border:3px solid #bbb;clear:both; margin-bottom:15px; display:block;}
+
+footer{padding-top:5px; width:100%; float:left;background: #1e4488;color: #fff;padding-bottom: 0px;}
+footer ul{list-style:none;}
+footer ul li{ margin:0px; display:inline; list-style:none;}
+footer ul li a{ color:#fff;font-size:12px; padding:0px 14px;}
+footer ul li a:hover{ color:#3be8b0}
+
+/* carousel */
+.media-carousel
+{
+  margin-bottom: 0;
+  padding: 0 30px;
+  margin-top: 25.5px;
+}
+.media-carousel .carousel-control.left
+{
+  opacity:1;
+  left: -12px;
+  background-image: none;
+  background: #1e4488;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 60px
+}
+.media-carousel .carousel-control.right
+{
+  opacity:1;
+  right: -12px !important;
+  background-image: none;
+  background: #1e4488;
+  border: 4px solid #fff;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 60px
+}
+.media-carousel .carousel-indicators
+{
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+.media-carousel .carousel-indicators li
+{
+  background: #3be8b0;
+}
+.media-carousel .carousel-indicators .active
+{
+  background: #000;
+}
+.media-carousel img
+{
+  border-radius:5px;
+  width: 250px;
+  height: 160px
+}
