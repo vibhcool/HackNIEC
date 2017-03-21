@@ -3,7 +3,7 @@ from django.shortcuts import render,get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist #This may be used instead of Users.DoesNotExist
 from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
-from django.urls import reverse
+from django.utils import reverse
 from .forms import LoginForm
 from .forms import SignupForm,studenLoginForm,StudentInfo,TestIdVal
 #for older versoins of Django use:
