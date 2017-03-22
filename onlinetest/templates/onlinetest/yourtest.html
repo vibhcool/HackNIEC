@@ -70,7 +70,12 @@
             <button type="button" class="btn btn-default">Welcome Admin</button>
         </div>
         <div class="col-md-4">
-            <a href="{% url 'onlinetest:paper_submit' %}" class="btn btn-danger"> Submit Test</a>
+<form method="POST" id="formid" action="{% url 'onlinetest:paper_submit' %}">
+                {% csrf_token %}
+                    <input type="button" onclick="submit()" class="btn btn-success" value="Submit Test">
+            <input type="text" value="{{ marks }}" name="kks" hidden>
+
+            </form>
         </div>
         <div class="col-md-4">
             <b>
@@ -84,7 +89,7 @@
     <div class="row">
         <div class="col-md-9">
             <form method="POST" id="formid" action="{% url 'onlinetest:yourtest' %}">
-                {% csrf_token %}
+                {% csrf_token %}            
                 <div class="container">
                     <button type="button" class="btn btn-primary">Question 1</button>
                     <br>
@@ -133,9 +138,9 @@
                         <input type="text" value="0" name="marks" hidden>
                     </div>
                     <input type="button" onclick="submit()" class="btn btn-success" value="Submit Answer"><br><br>
-            </form>
+            
         </div>
-
+</form>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -201,22 +206,36 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 <script>
-    function submit() {
-        var radios = document.getElementsByName('option');
-        var marks = document.getElementsByName('marks');
-        var answer = document.getElementsByName('answer');
-        for (var i = 0, length = radios.length; i < length; i++) {
-            if (radios[i].checked) {
-                // do whatever you want with the checked radio
-                if (answer == document.getElementsByName(radios[i].value).value)
-                    marks.value = 1;
-
-                // only one radio can be logically checked, don't check the rest
-                break;
-            }
-        }
-        $("#formid").submit();
+var marks = {{ marks }}
+function submit()
+{
+var radios = document.getElementsByName('option');
+var kks = document.getElementsByName('kks');
+var answer = document.getElementsByName('answer');
+//window.alert(marks.value);
+for (var i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+        // do whatever you want with the checked radio
+        if(answer.value == document.getElementsByName(radios[i].value).value){
+            //window.alert(marks.value);
+            //window.alert(answer.value);
+            //window.alert(document.getElementsByName(radios[i].value).value);
+            //marks.value = 1 + parseInt(marks.value);
+            marks = 1 + marks;
+            kks.value = marks;
+            window.alert(kks.value);
+}
+        // only one radio can be logically checked, don't check the rest
+        break;
     }
+}
+
+
+
+
+$("#formid").submit();
+
+}
 </script>
 
 </body>

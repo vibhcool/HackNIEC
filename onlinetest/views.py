@@ -64,6 +64,7 @@ def yourtest(request):
     global marks
     global ques_no
     total = len(questions)
+    marks = 0
     #return HttpResponse(total)
     if request.method == 'POST':
         if request.POST.get('prev') != None:
@@ -71,21 +72,27 @@ def yourtest(request):
         elif request.POST.get('next') != None:
             ques_no = ques_no + 1
         elif request.POST.get('marks') != None:
-            marks = marks + int(request.POST.get('marks'))
+            marks = request.POST.get('marks')
+        
     #return HttpResponse(str(ques_no) + " " + str(total))             
     if ques_no >= total:
         #return HttpResponse(questions[total-1].question)
-        return render(request, 'onlinetest/yourtest.html',{'question': questions[total-1]})
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[total-1], 'marks': marks})
     elif ques_no < 0:
         #return HttpResponse(questions[0].question)
-        return render(request, 'onlinetest/yourtest.html',{'question': questions[0]})
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[0], 'marks': marks})
     else:
         #return HttpResponse(questions[ques_no].question)
-        return render(request, 'onlinetest/yourtest.html',{'question': questions[ques_no]})
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[ques_no], 'marks': marks})
 
 
 def paper_submit(request):
     global marks
+    if request.method == 'POST':
+        #marks = request.POST.get('kks')
+        #return HttpResponse(marks)
+        marks = random.randint(0,4)
+    
     test_id = request.session['test_id']
     student_id = request.session['studentuid']
     student = studentProfile.objects.get(pk=student_id)
