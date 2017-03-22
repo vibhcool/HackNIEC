@@ -63,7 +63,7 @@
 <br><br>
 <br>
 <div class="container">
-    <h1><b> CLIENT LOGIN</b></h1><br>
+
     <a href="clientlogout" class="btn btn-success btn-lg" style="float: right">Logout</a>
     <p>
         <a href="{% static 'onlinetest/docs/quesformat.xlsx' %}" class="btn btn-warning">Download XL format</a>
@@ -71,7 +71,7 @@
     <p>
     <form method="post" enctype="multipart/form-data" action="../simple_upload/">
         {% csrf_token %}
-        <input type="file" name="myfile">
+        <input type="file" name="myfile"><br>
         <button type="submit">Upload</button>
     </form>
 
@@ -81,14 +81,6 @@
     </p>
 
 </div>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 <br/>
 <center><a href="#" class="btn btn-danger">Display Student Info</a></center>
 <center>
