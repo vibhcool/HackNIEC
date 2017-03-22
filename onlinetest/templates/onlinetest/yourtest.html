@@ -87,7 +87,9 @@
                         <br>
                         <b>  {{ question.question }}             </b>
                         <div class="col-sm-12">
-                            <div class="checkbox">
+            {% if question.option1 %}            
+
+                <div class="checkbox">
                                 <label>
             <input type="radio" name="option" value="1" checked>            
             {{ question.option1 }} <input type="text" value="{{ question.option1 }}" name="1" hidden>
@@ -112,6 +114,10 @@
           </label>
                             </div>
                         </div>
+        {% else %}
+                <input type="text" value="{{ question.answer }}" name="answer">
+
+        {% endif %}
                         <br><br><br>
                         <br>
 <div>
