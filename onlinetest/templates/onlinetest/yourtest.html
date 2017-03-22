@@ -70,64 +70,72 @@
             </div>
         </div>
     </div>
+
+<div>
+<a href="{% url 'onlinetest:paper_submit' %}"> submit </a>
+</div>
+
     <br>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <form>
-                    <div class="container">
+            
+                <form method="POST" id="formid" action="{% url 'onlinetest:yourtest' %}">
+{% csrf_token %}                    <div class="container">
                         <button type="button" class="btn btn-primary">Question 1</button>
                         <br>
                         <br>
-                        <b>  {{ questions}}             </b>
+                        <b>  {{ question.question }}             </b>
                         <div class="col-sm-12">
                             <div class="checkbox">
                                 <label>
-            <input type="checkbox" value="">            
-            Option one is this and that — be sure to include why it's great
+            <input type="radio" name="option" value="1" checked>            
+            {{ question.option1 }} <input type="text" value="{{ question.option1 }}" name="1" hidden>
           </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-            <input type="checkbox" value="">            
-            Option two is checked by default
+            <input type="radio" name="option" value="2">            
+            {{ question.option2 }} <input type="text" value="{{ question.option2 }}" name="2" hidden>
           </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-            <input type="checkbox" value="">            
-            Option one is this and that — be sure to include why it's great
+            <input type="radio" name="option" value="3">            
+            {{ question.option3 }} <input type="text" value="{{ question.option3 }}" name="3" hidden>
           </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-            <input type="checkbox" value="">            
-            Option one is this and that — be sure to include why it's great
+            <input type="radio" name="option" value="4">            
+            {{ question.option4 }} <input type="text" value="{{ question.option4 }}" name="4" hidden>
           </label>
                             </div>
                         </div>
                         <br><br><br>
                         <br>
-                        <button type="button" class="btn btn-success">Submit</button><br><br>
-
+<div>
+<input type="text" value="{{ question.answer }}" name="answer" hidden>
+<input type="text" value="0" name="marks" hidden>
+</div>
+                        <input type="button" onclick="submit()" class="btn btn-success" value="Submit"><br><br>
+</form>
                     </div>
-                </form>
+                
 
                 <nav class="page-navigation">
                     <span class="page-of"></span>
 
+                <form method="POST" action="{% url 'onlinetest:yourtest' %}">
+                 {% csrf_token %}   <ul class="page_navi clearfix">
+                        <input type="text" name="prev" hidden>
+                        <li class="page-numbers"><button>Previous</button></li>
+                </form>
 
-                    <ul class="page_navi clearfix">
-
-                        <li class="disabled"><span>Previous</span></li>
-                        <li><span class="page-numbers current">1</span></li>
-                        <li class="page-numbers"><a href="">2</a></li>
-                        <li class="page-numbers"><a href="">3</a></li>
-                        <li class="page-numbers"><a href="">4</a></li>
-                        <li class="page-numbers"><a href="">5</a></li>
-                        <li class="page-numbers"><a href="">6</a></li>
-                        <li class="page-numbers"><a href="">Next</a></li>
-
+                <form method="POST" action="{% url 'onlinetest:yourtest' %}">
+                 {% csrf_token %}       <input type="text" name="next" hidden>
+                        <li class="page-numbers"><button>Next</button></li>
+                </form>
                     </ul>
 
                 </nav>
@@ -156,6 +164,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" Async></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" Async integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+<script>
+function submit()
+{
+var radios = document.getElementsByName('option');
+var marks = document.getElementsByName('marks');
+var answer = document.getElementsByName('answer');
+for (var i = 0, length = radios.length; i < length; i++) {
+    if (radios[i].checked) {
+        // do whatever you want with the checked radio
+        if(answer == document.getElementsByName(radios[i].value).value)
+            marks.value = 1;
+
+        // only one radio can be logically checked, don't check the rest
+        break;
+    }
+}
+$("#formid").submit();
+}
+</script>
 
 </body>
 

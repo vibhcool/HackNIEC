@@ -18,6 +18,10 @@ from Crypto.Cipher import AES
 
 # from main.forms import SignupForm,LoginForm,SearchForm#,AddTopicForm,AddOpinionForm,
 
+marks = 0
+ques_no = 0
+questions = []
+
 def index(request):
     return render(request, 'onlinetest/index.html')
 
@@ -57,10 +61,36 @@ def studenthome(request):
 
 def yourtest(request):
     global questions
-    return render(request, 'onlinetest/yourtest.html',{'question': questions})
+    global marks
+    global ques_no
+    total = len(questions)
+    #return HttpResponse(total)
+    if request.method == 'POST':
+        if request.POST.get('prev') != None:
+            ques_no = ques_no - 1
+        elif request.POST.get('next') != None:
+            ques_no = ques_no + 1
+        elif request.POST.get('marks') != None:
+            marks = marks + int(request.POST.get('marks'))
+    #return HttpResponse(str(ques_no) + " " + str(total))             
+    if ques_no > total:
+        #return HttpResponse(questions[total-1].question)
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[total-1]})
+    elif ques_no < 0:
+        #return HttpResponse(questions[0].question)
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[0]})
+    else:
+        #return HttpResponse(questions[ques_no].question)
+        return render(request, 'onlinetest/yourtest.html',{'question': questions[ques_no]})
 
-#def get_question(request):
-    
+
+def paper_submit(request):
+    global marks
+    test_id = request.session['test_id']
+    student_id = request.session['studentuid']
+    student = studentProfile.objects.get(pk=student_id)
+    studentMark.objects.create(ques_paper_id=test_id, email=student.email, marks=marks)
+    return HttpResponseRedirect(reverse('onlinetest:index')) 
 
 def clientloginval(request):
     if request.method == 'POST':
@@ -108,8 +138,14 @@ def studentLogincheck(request):
                 request.session['studentuid'] = user.id
                 test_id = request.session.get('test_id')
                 questions = []
-                questions.append(question.objects.filter(question_id=test_id))
+                question_list = question.objects.filter(question_id=test_id)
+                for i in range(len(question_list)):
+                    questions.append(question_list[i])
+                #return HttpResponse(questions)
                 random.shuffle(questions)
+                #return HttpResponse("yoyo")
+                #total = len(questions)
+                #return HttpResponse(total)
     
                 return HttpResponseRedirect(reverse('onlinetest:yourtest'))
             except Users.DoesNotExist:
@@ -147,7 +183,9 @@ def studentInfo(request):
             request.session['studentuid'] = p.id
             test_id = request.session.get('test_id')
             questions = []
-            questions.append(question.objects.filter(question_id=test_id))
+            question_list = question.objects.filter(question_id=test_id)
+            for i in range(len(questions)):
+                questions.append(question_list[i])
             random.shuffle(questions)
     
             return HttpResponseRedirect(reverse('onlinetest:yourtest'))
