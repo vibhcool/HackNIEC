@@ -216,6 +216,7 @@ def simple_upload(request):
     return render(request, 'onlinetest/clientadmin.html')
 
 
-# def studentinfodisplay(request):
-#     tabledata = studentProfile.objects.filter(client=)
-#     return render(request, 'onlinetest/studentinfodisplay.html', {'tabledata': tabledata})
+def studentmarksdisplay(request):
+    sinfo = studentProfile.objects.all()
+    smarks = studentMark.objects.all()
+    return render(request, 'onlinetest/studentmarks.html', {'smarks': smarks, 'sinfo':sinfo})

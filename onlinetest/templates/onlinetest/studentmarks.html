@@ -62,49 +62,24 @@
 <br>
 <br><br>
 <br>
-<div class="container">
-
-    <a href="../clientlogout" class="btn btn-success btn-lg" style="float: right">Logout</a>
-    <p>
-        <a href="{% static 'onlinetest/docs/quesformat.xlsx' %}" class="btn btn-warning">Download XL format</a>
-    </p>
-    <p>
-    <form method="post" enctype="multipart/form-data" action="../simple_upload/">
-        {% csrf_token %}
-        <input type="file" name="myfile"><br>
-        <button type="submit">Upload</button>
-    </form>
-
-    {% if uploaded_file_url %}
-        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-    {% endif %}
-    </p>
-
-</div>
 <br/>
-<center><a href="../studentmarksdisplay" class="btn btn-danger">Display Student Result</a></center>
-<p></p>
-<center><a href="#" class="btn btn-danger">Student Info</a></center>
+<center><h3>Student Results</h3></center>
 <center>
     <div class="custyle" style="width: 70%;align-content: center">
         <table class="table table-striped custab">
             <thead>
             <tr>
-                <th>Client</th>
                 <th>Name</th>
                 <th>Email ID</th>
-                <th>Institute</th>
+                <th>Marks</th>
             </tr>
             </thead>
-            {% for tabledata in tabledata %}
-                {% if tabledata.client == clientid %}
-                <tr>
-                    <td>{{ tabledata.client }}</td>
-                    <td>{{ tabledata.name }}</td>
-                    <td>{{ tabledata.email }}</td>
-                    <td>{{ tabledata.institute }}</td>
-                </tr>
-                {% endif %}
+            {% for smarks in smarks %}
+                    <tr>
+                        <td>{{ sinfo.name }}</td>
+                        <td>{{ smarks.email }}</td>
+                        <td>{{ smarks.marks }}</td>
+                    </tr>
             {% endfor %}
         </table>
     </div>
