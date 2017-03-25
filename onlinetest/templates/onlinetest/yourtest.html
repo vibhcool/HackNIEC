@@ -70,10 +70,10 @@
             <button type="button" class="btn btn-default">Welcome Admin</button>
         </div>
         <div class="col-md-4">
-<form method="POST" id="formid" action="{% url 'onlinetest:paper_submit' %}">
+            <form method="POST" id="formid" action="{% url 'onlinetest:paper_submit' %}">
                 {% csrf_token %}
-                    <input type="button" onclick="submit()" class="btn btn-success" value="Submit Test">
-            <input type="text" value="{{ marks }}" name="kks" hidden>
+                <input type="button" onclick="submit()" class="btn btn-success" value="Submit Test">
+                <input type="text" value="{{ marks }}" name="kks" hidden>
 
             </form>
         </div>
@@ -89,7 +89,7 @@
     <div class="row">
         <div class="col-md-9">
             <form method="POST" id="formid" action="{% url 'onlinetest:yourtest' %}">
-                {% csrf_token %}            
+                {% csrf_token %}
                 <div class="container">
                     <button type="button" class="btn btn-primary">Question 1</button>
                     <br>
@@ -138,104 +138,102 @@
                         <input type="text" value="0" name="marks" hidden>
                     </div>
                     <input type="button" onclick="submit()" class="btn btn-success" value="Submit Answer"><br><br>
-            
-        </div>
-</form>
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            <form method="POST" action="{% url 'onlinetest:yourtest' %}">
-                {% csrf_token %}
-                    <input type="text" name="prev" hidden>
-                        <button class="btn btn-warning">Previous</button>
+
+                </div>
             </form>
-</div>
-        <div class="col-md-4">
-            <form method="POST" action="{% url 'onlinetest:yourtest' %}">
-                {% csrf_token %} <input type="text" name="next" hidden>
-                    <button class="btn btn-primary">Next</button>
-        </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <form method="POST" action="{% url 'onlinetest:yourtest' %}">
+                            {% csrf_token %}
+                            <input type="text" name="prev" hidden>
+                            <button class="btn btn-warning">Previous</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <form method="POST" action="{% url 'onlinetest:yourtest' %}">
+                            {% csrf_token %} <input type="text" name="next" hidden>
+                            <button class="btn btn-primary">Next</button>
+                        </form>
+                    </div>
+                    {#            <nav class="page-navigation">#}
+                    {#                <span class="page-of"></span>#}
+                    {##}
+                    {##}
+                    {#                <ul class="page_navi clearfix">#}
+                    {##}
+                    {#                    <li class="disabled"><span>Previous</span></li>#}
+                    {##}
+                    {##}
+                    {#                    <li><span class="page-numbers current">1</span></li>#}
+                    {##}
+                    {##}
+                    {#                    <li class="page-numbers"><a href="?page=2">2</a></li>#}
+                    {##}
+                    {##}
+                    {#                    <li class="page-numbers"><a href="?page=2">Next</a></li>#}
+                    {##}
+                    {#                </ul>#}
+                    {##}
+                    {#            </nav>#}
+                    </ul>
+
+                    </nav>
+                </div>
             </div>
-            {#            <nav class="page-navigation">#}
-            {#                <span class="page-of"></span>#}
-            {##}
-            {##}
-            {#                <ul class="page_navi clearfix">#}
-            {##}
-            {#                    <li class="disabled"><span>Previous</span></li>#}
-            {##}
-            {##}
-            {#                    <li><span class="page-numbers current">1</span></li>#}
-            {##}
-            {##}
-            {#                    <li class="page-numbers"><a href="?page=2">2</a></li>#}
-            {##}
-            {##}
-            {#                    <li class="page-numbers"><a href="?page=2">Next</a></li>#}
-            {##}
-            {#                </ul>#}
-            {##}
-            {#            </nav>#}
-            </ul>
-
-        </nav>
+            <div class="col-md-3">
+                <div id="time"></div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="col-md-3">
-    <div id="time"></div>
-</div>
-</div>
-</div>
-<br>
+    <br>
 
-<br>
-<center>
-    <footer id="footer" class="footer">
-        <br> ©2017 Open Source. All rights exploited
-        <div class="credits">
-            Designed and Developed for <a href="/"><b> HackNIEC</b></a><br>
-            <br>
-            <br>
-        </div>
-        </div>
-    </footer>
+    <br>
+    <center>
+        <footer id="footer" class="footer">
+            <br> ©2017 Open Source. All rights exploited
+            <div class="credits">
+                Designed and Developed for <a href="/"><b> HackNIEC</b></a><br>
+                <br>
+                <br>
+            </div>
+
+</footer>
 </center>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" Async></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" Async
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 <script>
-var marks = {{ marks }}
-function submit()
-{
-var radios = document.getElementsByName('option');
-var kks = document.getElementsByName('kks');
-var answer = document.getElementsByName('answer');
+    var marks = {{ marks }}
+            function submit() {
+                var radios = document.getElementsByName('option');
+                var kks = document.getElementsByName('kks');
+                var answer = document.getElementsByName('answer');
 //window.alert(marks.value);
-for (var i = 0, length = radios.length; i < length; i++) {
-    if (radios[i].checked) {
-        // do whatever you want with the checked radio
-        if(answer.value == document.getElementsByName(radios[i].value).value){
-            //window.alert(marks.value);
-            //window.alert(answer.value);
-            //window.alert(document.getElementsByName(radios[i].value).value);
-            //marks.value = 1 + parseInt(marks.value);
-            marks = 1 + marks;
-            kks.value = marks;
-            window.alert(kks.value);
-}
-        // only one radio can be logically checked, don't check the rest
-        break;
-    }
-}
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        // do whatever you want with the checked radio
+                        if (answer.value == document.getElementsByName(radios[i].value).value) {
+                            //window.alert(marks.value);
+                            //window.alert(answer.value);
+                            //window.alert(document.getElementsByName(radios[i].value).value);
+                            //marks.value = 1 + parseInt(marks.value);
+                            marks = 1 + marks;
+                            kks.value = marks;
+                            window.alert(kks.value);
+                        }
+                        // only one radio can be logically checked, don't check the rest
+                        break;
+                    }
+                }
 
 
+                $("#formid").submit();
 
-
-$("#formid").submit();
-
-}
+            }
 </script>
 
 </body>

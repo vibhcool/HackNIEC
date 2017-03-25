@@ -11,7 +11,7 @@ from .forms import SignupForm, studenLoginForm, StudentInfo, TestIdVal
 import ast
 from .models import Users, studentProfile, question, quesFile, studentMark
 import onlinetest.file_reader
-import datetime
+from django.utils.timezone import datetime
 
 import random
 #from Crypto.cipher import AES
@@ -200,7 +200,7 @@ def studentInfo(request):
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
-        now = str(datetime.datetime.now().strftime("%Y%m%d%H%M"))
+        now = str(datetime.now().strftime("%Y%m%d%H%M"))
         ques_paper = quesFile.objects.create(ques_paper_id=now, client=str(request.session['user_id']))
         ques_paper.save()
         myfile = request.FILES['myfile']
